@@ -1,7 +1,11 @@
 # Учебный проект образовательной платформы
 
+## Общий функционал
 ![](pictures/educa.png)
 ![](pictures/messages.png)
+
+## Схема работы сервера
+![](pictures/server.png)
 
 ## Функции приложения
 - Аутентификация
@@ -21,7 +25,7 @@
 - Реализация Web-socket клиента и Web-socket потребителя
 - Канальный слой с резидентным хранилищем Redis
 - Dockerfile, Docker Compose
-- NGINX
+- uWSGI, NGINX, Daphne
 
 ## Запуск
 Запуск memcached
@@ -32,6 +36,28 @@ docker run -it --rm --name memcached -p 11211:11211 memcached -m 64
 Запуск Redis
 ```shell
 docker run -it --rm --name redis -p 6379:6379 redis
+```
+
+## Production
+Запуск сборки
+```shell
+docker compose up
+```
+
+Собрать статические файлы
+```shell
+docker compose exec web python /code/educa/manage.py collectstatic
+```
+
+Запуск миграций
+
+```shell
+docker compose exec web python /code/manage.py migrate
+```
+
+Создание superuser
+```shell
+docker compose exec web python /code/manage.py createsuperuser
 ```
 
 

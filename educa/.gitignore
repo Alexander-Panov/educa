@@ -1,0 +1,7 @@
+db.sqlite3
+uwsgi_app.sock
+daphne.sock
+daphne.sock.lock
+
+/media
+/ssl
